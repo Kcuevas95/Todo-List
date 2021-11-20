@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 //create your first component
 
 export function Home() {
+	const [task, setTask] = useState("");
 	const [variable, setVariable] = useState([
 		"Do Homework",
 		"Do Laundry",
@@ -41,10 +42,9 @@ export function Home() {
 	const newTodo = onKeyDownEvent => {
 		console.log(onKeyDownEvent);
 		if (onKeyDownEvent.keyCode === 13) {
-			let userInput = onKeyDownEvent.target.value;
-			const newTodo = [...variable, userInput];
+			const newTodo = [...variable, task];
 			setVariable(newTodo);
-			onKeyDownEvent.target.value = "";
+			setTask("");
 		}
 	};
 
@@ -56,6 +56,8 @@ export function Home() {
 				<input
 					className="list-group-item input"
 					onKeyDown={newTodo}
+					value={task}
+					onChange={e => setTask(e.target.value)}
 					type="text"
 					id="fname"
 					placeholder="Task"
